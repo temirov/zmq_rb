@@ -1,4 +1,4 @@
-require_relative 'push_pull_base'
+require_relative 'base'
 
 module ZmqRb
   class Puller < Base
@@ -11,8 +11,6 @@ module ZmqRb
     def retrieve
       loop { yield socket.recv }
     end
-
-    private
 
     def mode
       :PULL

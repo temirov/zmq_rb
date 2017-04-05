@@ -1,3 +1,5 @@
 require 'zmq_rb/version'
 require 'zmq_rb/pusher'
 require 'zmq_rb/puller'
+require 'zmq_rb/publisher'
+require 'zmq_rb/subscriber'

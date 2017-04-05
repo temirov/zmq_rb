@@ -1,19 +1,19 @@
 require_relative 'base'
 
 module ZmqRb
-  class Pusher < Base
+  class Subscriber < Base
     def initialize(*)
       super do |socket|
-        socket.bind(endpoint)
+        socket.connect(endpoint)
       end
     end
 
-    def submit(payload)
-      socket.send(payload)
+    def retrieve
+      loop { yield socket.recv }
     end
 
     def mode
-      :PUSH
+      :SUB
     end
   end
 end

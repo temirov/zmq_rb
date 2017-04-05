@@ -2,7 +2,7 @@ require 'zmq'
 
 module ZmqRb
   class Base
-    def initialize(endpoint:, topic:)
+    def initialize(endpoint:, topic: nil)
       @endpoint = endpoint
       @topic = topic
 
@@ -13,20 +13,18 @@ module ZmqRb
       ctx.destroy
     end
 
+    def mode
+      raise NotImplementedError
+    end
+
     private
 
     attr_reader :endpoint, :topic
 
     def setup
-      socket.verbose = true
-      yield socket if block_given
+      # socket.verbose = true
+      yield socket if block_given?
       socket.linger = 0
-    end
-
-    def mode
-      raise unless super.in?(%i(PUSH PULL))
-
-      super
     end
 
     def socket
